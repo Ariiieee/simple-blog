@@ -62,7 +62,7 @@ const Searchbar = () => {
 					color: disabled ? "#a0a0a0" : "white",
 					fontWeight: "500",
 					fontSize: "1rem",
-					padding: "0.5rem 2rem",
+					padding: "0.75rem 2rem",
 					borderRadius: "100px",
 					cursor: disabled ? "not-allowed" : "pointer",
 					transition: "background-color 0.25s",
