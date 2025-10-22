@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import ArticleCard from "../components/ArticleCard";
 import Searchbar from "../components/Searchbar";
+// import Header from "../components/Header";
 import useAppContext from "../context/app.context";
 
 const Articles = () => {
@@ -8,14 +9,16 @@ const Articles = () => {
 
 	return (
 		<div>
+			{/* <Header /> */}
 			<div
 				style={{
-					height: "100vh",
+					minHeight: "calc(100vh - 80px)",
 					width: "100%",
 					position: "relative",
 					overflowY: "scroll",
 					scrollbarWidth: "none",
 					msOverflowStyle: "none",
+					padding: "0 2rem",
 				}}
 				className="no-scrollbar"
 			>
@@ -26,27 +29,42 @@ const Articles = () => {
 						width: "100%",
 						justifyContent: "space-between",
 						marginTop: "2rem",
+						alignItems: "center",
 					}}
 				>
-					<h6
+					<h2
 						style={{
 							textAlign: "left",
 							color: "#2E3031",
 							fontWeight: "600",
-							fontSize: "1.25rem",
+							fontSize: "1.5rem",
+							margin: 0,
 						}}
 					>
-						Articles
-					</h6>
+						All Articles ({filteredArticles.length})
+					</h2>
 					<Link to="/create">
-						<p
+						<button
 							style={{
-								color: "#F20000",
+								backgroundColor: "#F20000",
+								color: "white",
+								fontWeight: "500",
+								fontSize: "0.875rem",
+								padding: "0.5rem 1rem",
+								borderRadius: "0.375rem",
 								cursor: "pointer",
+								border: "none",
+								transition: "background-color 0.25s",
+							}}
+							onMouseOver={(e) => {
+								e.currentTarget.style.backgroundColor = "#d40000";
+							}}
+							onMouseOut={(e) => {
+								e.currentTarget.style.backgroundColor = "#F20000";
 							}}
 						>
 							+ Create Article
-						</p>
+						</button>
 					</Link>
 				</div>
 				<div

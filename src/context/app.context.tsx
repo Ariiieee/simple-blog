@@ -8,6 +8,8 @@ type AppContextType = {
 	setFilteredArticles: (filteredArticles: ArticleType[]) => void;
 	loading: boolean;
 	createArticle: (article: ArticleFormType) => void;
+	updateArticle: (id: number, article: ArticleFormType) => void;
+	deleteArticle: (id: number) => void;
 };
 
 export const AppContext = createContext({} as AppContextType);

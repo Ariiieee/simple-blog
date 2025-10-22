@@ -5,10 +5,15 @@ const Searchbar = () => {
 	const [searchValue, setSearchValue] = useState<string>("");
 	const [disabled, setDisabled] = useState<boolean>(false);
 
-	// function to filter the articles by name
+	// function to filter the articles by name, email, or body content
 	const handleSearch = () => {
 		const filteredArticles = articles.filter((article) => {
-			return article.name.toLowerCase().includes(searchValue.toLowerCase());
+			const searchTerm = searchValue.toLowerCase();
+			return (
+				article.name.toLowerCase().includes(searchTerm) ||
+				article.email.toLowerCase().includes(searchTerm) ||
+				article.body.toLowerCase().includes(searchTerm)
+			);
 		});
 		setFilteredArticles(filteredArticles);
 	};
@@ -17,6 +22,17 @@ const Searchbar = () => {
 	useEffect(() => {
 		if (searchValue === "") {
 			setFilteredArticles(articles);
+		} else {
+			// Real-time search as user types
+			const filteredArticles = articles.filter((article) => {
+				const searchTerm = searchValue.toLowerCase();
+				return (
+					article.name.toLowerCase().includes(searchTerm) ||
+					article.email.toLowerCase().includes(searchTerm) ||
+					article.body.toLowerCase().includes(searchTerm)
+				);
+			});
+			setFilteredArticles(filteredArticles);
 		}
 	}, [articles, searchValue, setFilteredArticles]);
 
@@ -51,7 +67,7 @@ const Searchbar = () => {
 					padding: "0.25rem 0.75rem",
 				}}
 				type="text"
-				placeholder="Search by name"
+				placeholder="Search by name, email, or content"
 				onChange={(e) => {
 					setSearchValue(e.target.value);
 				}}

@@ -61,6 +61,56 @@ const AppProvider = ({ children }: AppProviderProps) => {
 		}
 	};
 
+	const updateArticle = async (id: number, article: ArticleFormType) => {
+		try {
+			setLoading(true);
+
+			const updatedData = {
+				...article,
+				postId: 1,
+				id: id,
+			};
+
+			await fetch(`https://jsonplaceholder.typicode.com/comments/${id}`, {
+				method: "PUT",
+				body: JSON.stringify(updatedData),
+				headers: {
+					"content-type": "application/json, charset=utf-8",
+				},
+			});
+
+			const updatedArticles = articles.map((article) =>
+				article.id === id ? updatedData : article
+			);
+			setArticles(updatedArticles);
+			setFilteredArticles(updatedArticles);
+		} catch (error) {
+			alert("Error updating article");
+			console.log(error, "error");
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	const deleteArticle = async (id: number) => {
+		try {
+			setLoading(true);
+
+			await fetch(`https://jsonplaceholder.typicode.com/comments/${id}`, {
+				method: "DELETE",
+			});
+
+			const updatedArticles = articles.filter((article) => article.id !== id);
+			setArticles(updatedArticles);
+			setFilteredArticles(updatedArticles);
+		} catch (error) {
+			alert("Error deleting article");
+			console.log(error, "error");
+		} finally {
+			setLoading(false);
+		}
+	};
+
 	return (
 		<AppContext.Provider
 			value={{
@@ -70,6 +120,8 @@ const AppProvider = ({ children }: AppProviderProps) => {
 				setFilteredArticles,
 				loading,
 				createArticle,
+				updateArticle,
+				deleteArticle,
 			}}
 		>
 			{children}

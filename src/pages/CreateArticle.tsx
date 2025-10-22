@@ -1,26 +1,31 @@
 import { Link } from "react-router-dom";
 import ArticleForm from "../components/ArticleForm";
+// import Header from "../components/Header";
 
 const CreateArticles = () => {
 	return (
 		<div
 			style={{
 				width: "100%",
-				height: "100vh",
+				minHeight: "100vh",
 			}}
 		>
-			<Link to="/">
-				<p
-					style={{
-						color: "#F20000",
-						cursor: "pointer",
-						fontSize: "0.875rem",
-					}}
-				>
-					&larr; Go Back
-				</p>
-			</Link>
-			<ArticleForm />
+			{/* <Header /> */}
+			<div style={{ padding: "0 2rem" }}>
+				<Link to="/">
+					<p
+						style={{
+							color: "#F20000",
+							cursor: "pointer",
+							fontSize: "0.875rem",
+							marginTop: "1rem",
+						}}
+					>
+						&larr; Go Back
+					</p>
+				</Link>
+				<ArticleForm />
+			</div>
 		</div>
 	);
 };
